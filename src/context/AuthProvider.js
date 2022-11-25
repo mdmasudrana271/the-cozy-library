@@ -21,7 +21,9 @@ const AuthProvide = ({children}) => {
     const [user, setUser] = useState({})
     const [error, setError] = useState('')
     const [services, setServices] = useState([])
+    const [category, setCategory] = useState({})
   
+
     const [loading, setLoading] = useState(true)
     
     const createUser = (email, password)=>{
@@ -57,7 +59,6 @@ const AuthProvide = ({children}) => {
       }
 
       const resetPassword = (email) => {
-        console.log(email)
         return sendPasswordResetEmail(auth, email);
       };
 
@@ -71,7 +72,7 @@ const AuthProvide = ({children}) => {
         }
       },[])
     
-    const authInfo = {user ,createUser , signInWithEmailPassword, googleLogin, updateUserProfile, logOut, resetPassword, loading, error, setError, services, setServices, time}
+    const authInfo = {user ,createUser , signInWithEmailPassword, googleLogin, updateUserProfile, logOut, resetPassword, loading, error, setError, services, setServices, time, category, setCategory}
   return (
     <AuthContext.Provider value={authInfo}>
       <ThemeContext.Provider value={{ theme, setTheme }}>

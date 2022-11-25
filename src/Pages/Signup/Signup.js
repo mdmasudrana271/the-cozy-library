@@ -48,7 +48,7 @@ const Signup = () => {
           const createdUser = {
             name: data.name,
             email: data.email,
-            type: data.type,
+            role: data.type,
             image: imgData.data.url,
           };
 
@@ -86,7 +86,7 @@ const Signup = () => {
       const createdUser = {
         name: user.displayName,
         email: user.email,
-        type: 'Buyer',
+        role: 'Buyer',
         image: user.photoURL,
       };
       saveUser(createdUser)

@@ -80,7 +80,7 @@ const Header = () => {
             </div>
           </ul>
         </div>
-        <Link to='/' className="btn btn-ghost normal-case text-xl font-bold"><FaBookOpen className="text-orange-400 text-2xl mr-1"/><span className="text-primary mr-1">THE COZY</span> LIBRARY</Link>
+        <Link to='/' className="btn btn-ghost normal-case text-xl font-bold"><FaBookOpen className="text-orange-400 text-2xl mr-1"/><span className="text-info mr-1">THE COZY</span> LIBRARY</Link>
       </div>
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
@@ -90,6 +90,7 @@ const Header = () => {
           
           {user ? (
             <>
+            <li><Link to='dashboard'>Dashboard</Link></li>
               <li onClick={logOut}>
                 <Link>Logout</Link>
               </li>

@@ -62,7 +62,7 @@ const Login = () => {
       const createdUser = {
         name: user.displayName,
         email: user.email,
-        type: 'Buyer',
+        role: 'Buyer',
         image: user.photoURL,
       };
       saveUser(createdUser)
