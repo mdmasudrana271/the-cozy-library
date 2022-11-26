@@ -17,7 +17,7 @@ const Header = () => {
   };
     
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -58,6 +58,7 @@ const Header = () => {
             
             {user ? (
             <>
+            <li><Link to='/dashboard'>Dashboard</Link></li>
               <li onClick={logOut}>
                 <Link>Logout</Link>
               </li>
@@ -90,7 +91,7 @@ const Header = () => {
           
           {user ? (
             <>
-            <li><Link to='dashboard'>Dashboard</Link></li>
+            <li><Link to='/dashboard'>Dashboard</Link></li>
               <li onClick={logOut}>
                 <Link>Logout</Link>
               </li>
@@ -119,6 +120,11 @@ const Header = () => {
             {theme === "dark" ? <FaSun></FaSun> : <FaMoon></FaMoon>}
           </div>
         </ul>
+      </div>
+      <div className="navbar-end lg:hidden">
+      <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
       </div>
     </div>
   );

@@ -3,23 +3,25 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import useToken from "../../hooks/useToken";
 
 const Signup = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
+  const { register,  formState: { errors },  handleSubmit,  reset,} = useForm();
+
+  const [signUpError, setSignUPError] = useState('');
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail);
+    const navigate = useNavigate();
+
   const imageHostKey = process.env.REACT_APP_IMGBB_API_KEY;
   const [passwordType, setPasswordType] = useState("password");
   const googleProvider = new GoogleAuthProvider();
   const { googleLogin, createUser, updateUserProfile } =
     useContext(AuthContext);
 
-    // toggle password type on input field 
+  // toggle password type on input field
 
   const handlePasswordType = () => {
     if (passwordType === "password") {
@@ -30,8 +32,10 @@ const Signup = () => {
     }
   };
 
-
-  // signup with email and password 
+  // signup with email and password
+  if(token){
+    navigate('/');
+}
 
   const handleSignup = (data) => {
     const image = data.image[0];
@@ -51,45 +55,46 @@ const Signup = () => {
             role: data.type,
             image: imgData.data.url,
           };
-
+          setSignUPError('');
           createUser(data.email, data.password)
             .then((result) => {
               const user = result.user;
+              console.log(user)
+              toast.success("Create User Successfull");
               const userInfo = {
                 displayName: createdUser.name,
                 photoURL: createdUser.image,
               };
-              console.log(user);
+              setCreatedUserEmail(createUser.email);
               updateUserProfile(userInfo)
-                .then(() => {
-                  saveUser(createdUser)
-                })
-                .catch((error) => {
-                  console.log(error.message);
-                });
-              toast.success("Register successfull");
+              .then(()=>{
+                saveUser(createdUser);
+              })
+              .catch(error=> console.log(error))
               reset();
             })
             .catch((error) => {
               console.log(error.message);
+              setSignUPError(error.message)
             });
         }
       });
   };
 
-  // login with google 
+  // login with google
 
   const handleGoogleLogin = () => {
     googleLogin(googleProvider).then((result) => {
       const user = result.user;
-      console.log(user);
+      // console.log(user);
       const createdUser = {
         name: user.displayName,
         email: user.email,
-        role: 'Buyer',
+        role: "Buyer",
         image: user.photoURL,
       };
-      saveUser(createdUser)
+      setCreatedUserEmail(createUser.email);
+      saveUser(createdUser);
     });
   };
 
@@ -100,15 +105,12 @@ const Signup = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(createdUser),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.acknowledged) {
-          // navigate('/dashboard/managedoctors')
-        }
+        console.log(data)
       });
   };
 

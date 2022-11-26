@@ -10,11 +10,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
   const { register, formState: {errors}, handleSubmit, reset } = useForm();
   const {signInWithEmailPassword, googleLogin, resetPassword} = useContext(AuthContext)
-  
   const googleProvider = new GoogleAuthProvider();
-
   const [email, setEmail] = useState('')
-
   const [userLoginEmail, setUserLoginEmail] = useState('')
   const [token] = useToken(userLoginEmail)
 
@@ -58,15 +55,15 @@ const Login = () => {
     googleLogin(googleProvider)
     .then(result => {
       const user = result.user;
-      console.log(user)
+      // console.log(user)
       const createdUser = {
         name: user.displayName,
         email: user.email,
         role: 'Buyer',
         image: user.photoURL,
       };
-      saveUser(createdUser)
-     
+      setUserLoginEmail(createdUser.email)
+     saveUser(createdUser)
     })
   }
 
@@ -83,14 +80,13 @@ const Login = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(createdUser),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          // navigate('/dashboard/managedoctors')
+          
         }
       });
   }; 

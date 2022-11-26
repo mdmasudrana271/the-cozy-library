@@ -37,14 +37,15 @@ const AddProduct = () => {
           year: data.year,
           sellerName: user.displayName,
           time: time,
-          category:data.category
+          category:data.category,
+          email: user.email,
         }
 
         fetch('http://localhost:5000/products',{
           method: 'POST',
           headers: {
             'content-type': 'application/json',
-            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
           },
           body: JSON.stringify(product)
         })

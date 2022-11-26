@@ -1,20 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
-import { AuthContext } from '../../context/AuthProvider';
 import CategoryCard from './CategoryCard';
 
 const Category = () => {
-    
-    const {setCategory} = useContext(AuthContext)
 
     const {data : categories, isLoading } = useQuery({
         queryKey: ['category'],
         queryFn: async ()=> {
             const res = await fetch('http://localhost:5000/category')
             const data = await res.json()
-            setCategory(data)
             return data;
         }
     })
