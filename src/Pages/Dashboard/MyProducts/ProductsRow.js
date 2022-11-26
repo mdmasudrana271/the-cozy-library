@@ -1,8 +1,29 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 const ProductsRow = ({product}) => {
-    console.log(product)
+    // console.log(product)
     const {image, name, price} = product;
+
+    const handelAdvertise = (product)=>{
+      fetch('http://localhost:5000/advertise',{
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
+          },
+          body: JSON.stringify(product)
+        })
+        .then(res =>res.json())
+        .then(data =>{
+          if(data.acknowledged){
+            toast.success('Add Product Successfully')
+          }
+        })
+
+      // console.log(product)
+    }
+
   return (
     <tr>
       <td>
@@ -25,9 +46,12 @@ const ProductsRow = ({product}) => {
         {price}
       </td>
       <td>Purple</td>
-      <th>
+      <td>
         <button className="btn btn-warning btn-xs">Delete</button>
-      </th>
+      </td>
+      <td>
+        <button onClick={()=> handelAdvertise(product)} className="btn btn-info btn-xs">Ads</button>
+      </td>
     </tr>
   );
 };

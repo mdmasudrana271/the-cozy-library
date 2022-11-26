@@ -6,9 +6,9 @@ import SellerRow from "./SellerRow";
 const MySeller = () => {
 
   const { data:seller, isLoading, refetch, } = useQuery({
-    queryKey: ["users/seller"],
+    queryKey: ["seller"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users/seller", {
+      const res = await fetch("http://localhost:5000/seller", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
         },
@@ -22,7 +22,7 @@ const MySeller = () => {
     <Spinner></Spinner>;
   }
 
-  refetch();
+  // refetch();
   // console.log(seller)
 
   return (

@@ -20,7 +20,6 @@ const MyProducts = () => {
     },
   });
 
-  console.log(products)
   if(isLoading){
     return <Spinner></Spinner>
   }

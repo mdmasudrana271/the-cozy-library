@@ -41,6 +41,7 @@ const AuthProvide = ({children}) => {
       signOut(auth)
       .then(()=>{
         console.log('log out success')
+        localStorage.removeItem('bookAccessToken')
       })
       .catch(error => {
         console.log(error.message)

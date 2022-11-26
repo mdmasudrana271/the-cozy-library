@@ -19,9 +19,9 @@ const Login = () => {
   const navigate = useNavigate()
   const from = location.state?.from?.pathname || "/";
 
-  if(token){
-    navigate(from, {replace: true})
-  }
+  // if(token){
+  //   navigate(from, {replace: true})
+  // }
 
   // toggle password type text to password and toggle eye button 
   const [passwordType, setPasswordType] = useState("password");
@@ -43,7 +43,8 @@ const Login = () => {
       console.log(user)
       toast.success('Login successfull')
       setUserLoginEmail(data.email)
-      reset()
+      // navigate(from, {replace: true})
+      // reset()
     })
     .catch(error=> {
       console.log(error.message)
