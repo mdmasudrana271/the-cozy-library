@@ -1,29 +1,22 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import Spinner from "../../../components/Spinner/Spinner";
+import React, { useEffect, useState } from "react";
 import SellerRow from "./SellerRow";
 
 const MySeller = () => {
 
-  const { data:seller, isLoading, refetch, } = useQuery({
-    queryKey: ["seller"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:5000/seller", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
-        },
-      });
-      const data = await res.json();
-      return data;
-    },
-  });
+  const [seller, setSeller] = useState([])
 
-  if (isLoading) {
-    <Spinner></Spinner>;
-  }
-
-  // refetch();
-  // console.log(seller)
+  useEffect(()=>{
+    fetch('http://localhost:5000/seller',{
+      headers: {
+         authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
+         },
+    })
+    .then(res=> res.json())
+    .then(data=>{
+      console.log(data)
+      setSeller(data)
+    })
+  },[])
 
   return (
     <section>
@@ -43,7 +36,7 @@ const MySeller = () => {
             </thead>
             <tbody>
             {
-              seller.map(user=> <SellerRow key={user._id} user={user}></SellerRow>)
+              seller?.map(user=> <SellerRow key={user._id} user={user}></SellerRow>)
             }
             </tbody>
           </table>

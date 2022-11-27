@@ -1,28 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
-import Spinner from "../../../components/Spinner/Spinner";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
 import ProductsRow from "./ProductsRow";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
+  const [products, setProducts] = useState([])
 
-  const { data: products, isLoading } = useQuery({
-    queryKey: ["my-products"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/my-products?email=${user.email}`,{
+  useEffect(()=>{
+    fetch(`http://localhost:5000/my-products?email=${user.email}`,{
         headers: {
           authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
       }
-      });
-      const data = await res.json();
-      return data;
-    },
-  });
+      })
+      .then(res => res.json())
+      .then(data=> {
+        console.log(data)
+        setProducts(data)
+      })
+  },[user.email])
 
-  if(isLoading){
-    return <Spinner></Spinner>
-  }
 
   return (
     <section>
@@ -41,7 +37,7 @@ const MyProducts = () => {
             </thead>
             <tbody>
               {
-                products.map(product=> <ProductsRow key={product._id} product={product}></ProductsRow>)
+                products?.map(product=> <ProductsRow key={product._id} product={product}></ProductsRow>)
               }
             </tbody>
           </table>

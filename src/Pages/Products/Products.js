@@ -17,10 +17,11 @@ const Products = () => {
         ))}
       </div>
       }
-      {
-                booking &&
-                <BookingModal booking={booking} setBooking={setBooking}></BookingModal>
-                }
+
+
+      {booking && (
+        <BookingModal booking={booking} setBooking={setBooking}></BookingModal>
+      )}
     </section>
   );
 };

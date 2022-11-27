@@ -12,7 +12,6 @@ import Products from "../Pages/Products/Products";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 import Signup from "../Pages/Signup/Signup";
 import AdminRoute from "./AdminRoute";
-import BuyerRoute from "./BuyerRoute";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoute";
 
@@ -53,12 +52,8 @@ const router = createBrowserRouter([
         errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
-                path:'/dashboard',
-                element: <PrivateRoute><BuyerRoute><MyOrders></MyOrders></BuyerRoute></PrivateRoute>
-            },
-            {
-                path: '/dashboard/My-orders',
-                element: <PrivateRoute><BuyerRoute><MyOrders></MyOrders></BuyerRoute></PrivateRoute>
+                path: '/dashboard/my-orders',
+                element: <PrivateRoute><MyOrders></MyOrders></PrivateRoute>
 
             },
             {

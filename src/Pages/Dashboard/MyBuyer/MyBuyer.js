@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../../components/Spinner/Spinner";
 import BuyerRow from "./BuyerRow";
 
@@ -22,6 +22,21 @@ const MyBuyer = () => {
     //     <Spinner></Spinner>;
     //   }
 
+    const [buyers, setBuyers] = useState([])
+
+    useEffect(()=>{
+      fetch('http://localhost:5000/buyers',{
+        headers: {
+           authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
+           },
+      })
+      .then(res=> res.json())
+      .then(data=>{
+        setBuyers(data)
+      })
+    },[])
+
+
   return (
     <section>
       <h2 className="text-3xl font-bold">My Buyers</h2>
@@ -33,21 +48,19 @@ const MyBuyer = () => {
                 <th>Avater</th>
                 <th>Name</th>
                 <th>email</th>
-                <th>Status</th>
                 <th>Action</th>
-                <th>Advertised</th>
               </tr>
             </thead>
             <tbody>
-              {/* {seller.length < 0 ? (
+              {buyers?.length < 0 ? (
                 "There is no seller"
               ) : (
                 <>
-                  {seller.map((user) => (
+                  {buyers?.map((user) => (
                     <BuyerRow key={user._id} user={user}></BuyerRow>
                   ))}
                 </>
-              )} */}
+              )}
             </tbody>
           </table>
         </div>
