@@ -11,15 +11,14 @@ const Signup = () => {
   const { register,  formState: { errors },  handleSubmit,  reset,} = useForm();
 
   const [signUpError, setSignUPError] = useState('');
-    const [createdUserEmail, setCreatedUserEmail] = useState('')
-    const [token] = useToken(createdUserEmail);
+    const [userLoginEmail, setUserLoginEmail] = useState('')
+    const [token] = useToken(userLoginEmail);
     const navigate = useNavigate();
 
   const imageHostKey = process.env.REACT_APP_IMGBB_API_KEY;
   const [passwordType, setPasswordType] = useState("password");
   const googleProvider = new GoogleAuthProvider();
-  const { googleLogin, createUser, updateUserProfile } =
-    useContext(AuthContext);
+  const { googleLogin, createUser, updateUserProfile } = useContext(AuthContext);
 
   // toggle password type on input field
 
@@ -54,6 +53,7 @@ const Signup = () => {
             email: data.email,
             role: data.type,
             image: imgData.data.url,
+            verified: false
           };
           setSignUPError('');
           createUser(data.email, data.password)
@@ -65,7 +65,6 @@ const Signup = () => {
                 displayName: createdUser.name,
                 photoURL: createdUser.image,
               };
-              setCreatedUserEmail(createUser.email);
               updateUserProfile(userInfo)
               .then(()=>{
                 saveUser(createdUser);
@@ -83,20 +82,22 @@ const Signup = () => {
 
   // login with google
 
-  const handleGoogleLogin = () => {
-    googleLogin(googleProvider).then((result) => {
+  const handleGoogleLogin = ()=>{
+    googleLogin(googleProvider)
+    .then(result => {
       const user = result.user;
-      // console.log(user);
+      // console.log(user)
       const createdUser = {
         name: user.displayName,
         email: user.email,
-        role: "Buyer",
+        role: 'Buyer',
         image: user.photoURL,
+        verified: false
       };
-      setCreatedUserEmail(createUser.email);
-      saveUser(createdUser);
-    });
-  };
+      setUserLoginEmail(createdUser.email)
+     saveUser(createdUser)
+    })
+  }
 
   // post user information on database
 
@@ -110,6 +111,7 @@ const Signup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setUserLoginEmail(createdUser.email);
         console.log(data)
       });
   };
@@ -218,6 +220,7 @@ const Signup = () => {
               <p className="text-error">{errors.password?.message}</p>
             )}
           </div>
+          <p>{signUpError}</p>
           <input
             className="btn btn-info w-full mt-5 text-xl font-bold"
             value="Signup"

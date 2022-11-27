@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../context/AuthProvider";
+import React from "react";
 
 const CategoryCard = ({category}) => {
   return (

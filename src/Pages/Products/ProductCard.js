@@ -2,7 +2,7 @@ import React from "react";
 import { FaClock } from 'react-icons/fa';
 
 const ProductCard = ({product, setBooking}) => {
-    const {name, image, condition, oldPrice, price, location, sellerName, time, year} = product;
+    const {name, image, condition, oldPrice, price, location, sellerName, time, year, status} = product;
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <figure>
@@ -27,6 +27,7 @@ const ProductCard = ({product, setBooking}) => {
         <div className="md:flex justify-between items-center">
         <p>Use: {year} years</p>
         <p>Condition: {condition}</p>
+        <p className="text-orange-400 font-bold">{status}</p>
         </div>
         <div className="card-actions justify-end">
           <div className="badge badge-outline cursor-pointer">Add WishList</div>

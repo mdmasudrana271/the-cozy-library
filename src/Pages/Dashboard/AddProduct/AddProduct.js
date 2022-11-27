@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -39,6 +38,8 @@ const AddProduct = () => {
           time: time,
           category:data.category,
           email: user.email,
+          advertise: false,
+          status: 'available'
         }
 
         fetch('http://localhost:5000/products',{
@@ -56,7 +57,6 @@ const AddProduct = () => {
             navigate('/dashboard/my-products')
           }
         })
-        console.log(product)
 
       }
 
@@ -96,7 +96,7 @@ const AddProduct = () => {
           <input
             {...register("oldPrice", { required: "Old price is required" })}
             type="text"
-            defaultValue='৳'
+            defaultValue='$'
             className="input input-bordered w-full"
           />
           {errors.oldPrice && (

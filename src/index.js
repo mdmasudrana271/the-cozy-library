@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Toaster } from "react-hot-toast";
 import AuthProvide from "./context/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

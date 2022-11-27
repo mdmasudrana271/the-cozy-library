@@ -44,7 +44,7 @@ const Login = () => {
       toast.success('Login successfull')
       setUserLoginEmail(data.email)
       // navigate(from, {replace: true})
-      // reset()
+      reset()
     })
     .catch(error=> {
       console.log(error.message)
@@ -62,6 +62,7 @@ const Login = () => {
         email: user.email,
         role: 'Buyer',
         image: user.photoURL,
+        verified: false
       };
       setUserLoginEmail(createdUser.email)
      saveUser(createdUser)

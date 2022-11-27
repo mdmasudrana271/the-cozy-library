@@ -1,6 +1,33 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
+import Spinner from "../../../components/Spinner/Spinner";
+import { AuthContext } from "../../../context/AuthProvider";
+import OrdersRow from "./OrdersRow";
 
 const MyOrders = () => {
+
+  const {user} = useContext(AuthContext)
+
+  const {data: products = [], isLoading} = useQuery({
+    queryKey: ['/my-orders'],
+    queryFn: async ()=>{
+      const res = await fetch(`http://localhost:5000/my-orders?email=${user.email}`,{
+        headers: {
+          'content-type': 'application/json',
+          authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
+        },
+      })
+      const data = res.json()
+      return data
+    }
+  })
+
+  if(isLoading){
+    return <Spinner></Spinner>
+  }
+
+  console.log(products)
+
   return (
     <section>
       <section>
@@ -12,18 +39,17 @@ const MyOrders = () => {
                 <tr>
                   <th>Name</th>
                   <th>Price</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                  <th>Advertised</th>
+                  <th>Meeting Location</th>
+                  <th>Payment</th>
                 </tr>
               </thead>
               <tbody>
-                {/* {products.map((product) => (
-                  <ProductsRow
+                {products.map((product) => (
+                  <OrdersRow
                     key={product._id}
                     product={product}
-                  ></ProductsRow>
-                ))} */}
+                  ></OrdersRow>
+                ))}
               </tbody>
             </table>
           </div>

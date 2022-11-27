@@ -9,15 +9,15 @@ const BookingModal = ({booking, setBooking}) => {
     const handleBooking = event => {
         event.preventDefault();
         const form = event.target;
-        const productName = form.productName.value;
-        const name = form.name.value;
+        const product = form.product.value;
+        const name = form.buyerName.value;
         const email = form.email.value;
         const phone = form.phone.value;
         const price = form.price.value;
         const location = form.location.value;
 
         const order = {
-            product: productName,
+            product: product,
             clientName: name,
             email,
             phone,
@@ -29,7 +29,8 @@ const BookingModal = ({booking, setBooking}) => {
         fetch('http://localhost:5000/bookings',{
           method: 'POST',
           headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
           },
           body: JSON.stringify(order)
         })
@@ -45,6 +46,7 @@ const BookingModal = ({booking, setBooking}) => {
             setBooking(null)
           }
         })
+
 
         
     }
@@ -66,7 +68,7 @@ const BookingModal = ({booking, setBooking}) => {
                 <label className="label">
                     <span className="label-text">Name</span>
                  </label>
-                <input name='name' type="text" defaultValue={user?.displayName}  disabled className="input input-bordered w-full" />
+                <input name='buyerName' type="text" defaultValue={user?.displayName}  disabled className="input input-bordered w-full" />
                 </div>
                 <div>
                 <label className="label">
@@ -78,7 +80,7 @@ const BookingModal = ({booking, setBooking}) => {
                 <label className="label">
                     <span className="label-text">Product Name</span>
                  </label>
-                <input name='productName' type="text" required defaultValue={booking?.name} disabled  className="input input-bordered w-full" />
+                <input name='product' type="text" required defaultValue={booking?.name} disabled  className="input input-bordered w-full" />
                 </div>
                 <div>
                 <label className="label">
@@ -90,13 +92,13 @@ const BookingModal = ({booking, setBooking}) => {
                 <label className="label">
                     <span className="label-text">Meeting Location</span>
                  </label>
-                <input name='location' type="text" required placeholder="Meeting Location" className="input input-bordered w-full" />
+                <input name='location' type="text" required placeholder="Meeting Location"  className="input input-bordered w-full" />
                 </div>
                 <div>
                 <label className="label">
                     <span className="label-text">Phone Number</span>
                  </label>
-                <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" />
+                <input name='phone' type="text" placeholder="Phone Number" required className="input input-bordered w-full" />
                 </div>
                 <input type="submit"   className="btn btn-accent w-full" />
               </form>
