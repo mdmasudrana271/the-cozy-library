@@ -24,9 +24,6 @@ const MyOrders = () => {
 
   return (
     <div>
-      {products.length === 0 ? (
-        <p className="text-3xl mx-20 mt-5">You have no orders</p>
-      ) : (
         <section>
           <section>
             <h2 className="text-3xl font-bold">My Orders</h2>
@@ -54,7 +51,6 @@ const MyOrders = () => {
             </div>
           </section>
         </section>
-      )}
     </div>
   );
 };

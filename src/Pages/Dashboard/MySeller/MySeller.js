@@ -14,20 +14,25 @@ const MySeller = () => {
     setDeleteSeller(null);
   };
 
-
-  const {data: seller = [], isLoading, refetch} = useQuery({
+  const {
+    data: seller = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["seller"],
-  queryFn: async () => {
-    const res = await fetch('https://the-cozy-library-server.vercel.app/seller', {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
-      },
-    });
-    const data = res.json();
-    return data;
-  },
-  })
-
+    queryFn: async () => {
+      const res = await fetch(
+        "https://the-cozy-library-server.vercel.app/seller",
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
+          },
+        }
+      );
+      const data = res.json();
+      return data;
+    },
+  });
 
   // useEffect(() => {
   //   fetch("https://the-cozy-library-server.vercel.app/seller", {
@@ -42,18 +47,21 @@ const MySeller = () => {
   // }, []);
 
   const handleMakeVerified = (user) => {
-    fetch(`https://the-cozy-library-server.vercel.app/verify-seller/${user._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
-      },
-    })
+    fetch(
+      `https://the-cozy-library-server.vercel.app/verify-seller/${user._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
           toast.success("Seller verified successfully");
-          refetch()
+          refetch();
         }
       });
   };
@@ -70,89 +78,82 @@ const MySeller = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           toast.success("Delete Seller Successfully");
-          refetch()
+          refetch();
         }
       });
   };
 
-  if(isLoading){
-    return <Spinner></Spinner>
+  if (isLoading) {
+    return <Spinner></Spinner>;
   }
-
 
   return (
     <section>
-      {seller?.length === 0 ? (
-        <p className="text-3xl mt-10 font-bold">You have no products</p>
-      ) : (
-        <>
-          <h2 className="text-3xl font-bold">My Products</h2>
-          <div className="my-5">
-            <div className="overflow-x-auto w-full">
-              <table className="table w-full">
-                <thead>
-                  <tr>
-                    <th>Avatar</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                    <th>Verify</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {seller?.map((user) => (
-                    <tr key={user._id}>
-                      <td>
-                        <div className="flex items-center space-x-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                              <img src={user?.image} alt="Product img" />
-                            </div>
-                          </div>
+      <h2 className="text-3xl font-bold">My Products</h2>
+      <div className="my-5">
+        <div className="overflow-x-auto w-full">
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th>Avatar</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+                <th>Verify</th>
+              </tr>
+            </thead>
+            <tbody>
+              {seller?.map((user) => (
+                <tr key={user._id}>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img src={user?.image} alt="Product img" />
                         </div>
-                      </td>
-                      <td>{user?.name}</td>
-                      <td>{user?.email}</td>
-                      <td>
-                        <label
-                          onClick={() => setDeleteSeller(user)}
-                          htmlFor="confirmation-modal"
-                          className="btn btn-sm btn-warning"
-                        >
-                          Delete
-                        </label>
-                      </td>
-                      <th>
-                        {user?.verified === "true" ? (
-                          "Verified"
-                        ) : (
-                          <button
-                            onClick={() => handleMakeVerified(user)}
-                            className="btn btn-info btn-xs"
-                          >
-                            verify
-                          </button>
-                        )}
-                      </th>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{user?.name}</td>
+                  <td>{user?.email}</td>
+                  <td>
+                    <label
+                      onClick={() => setDeleteSeller(user)}
+                      htmlFor="confirmation-modal"
+                      className="btn btn-sm btn-warning"
+                    >
+                      Delete
+                    </label>
+                  </td>
+                  <th>
+                    {user?.verified === "true" ? (
+                      "Verified"
+                    ) : (
+                      <button
+                        onClick={() => handleMakeVerified(user)}
+                        className="btn btn-info btn-xs"
+                      >
+                        verify
+                      </button>
+                    )}
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-            {deleteSeller && (
-              <ConfirmationModal
-                title={`are you sure you want to delete`}
-                message={`if you delete ${deleteSeller.name}. it can't be undone`}
-                closeModal={closeModal}
-                successAction={handleDeleteSeller}
-                modalData={deleteSeller}
-                successButton="Delete"
-              ></ConfirmationModal>
-            )}
-          </div>
-        </>
-      )}
+        {deleteSeller && (
+          <ConfirmationModal
+            title={`are you sure you want to delete`}
+            message={`if you delete ${deleteSeller.name}. it can't be undone`}
+            closeModal={closeModal}
+            successAction={handleDeleteSeller}
+            modalData={deleteSeller}
+            successButton="Delete"
+          ></ConfirmationModal>
+        )}
+      </div>
     </section>
   );
 };

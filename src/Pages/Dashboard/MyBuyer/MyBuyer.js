@@ -52,9 +52,6 @@ const MyBuyer = () => {
 
   return (
     <section>
-      {buyers?.length === 0 ? (
-        <p className="text-3xl mt-10 font-bold">You have no products</p>
-      ) : (
         <>
           <h2 className="text-3xl font-bold">My Products</h2>
           <div className="my-5">
@@ -109,7 +106,7 @@ const MyBuyer = () => {
             )}
           </div>
         </>
-      )}
+      
     </section>
   );
 };
