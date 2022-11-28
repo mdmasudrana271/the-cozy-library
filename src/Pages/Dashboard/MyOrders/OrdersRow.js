@@ -11,7 +11,7 @@ const OrdersRow = ({product}) => {
       <td>{product.location}</td>
       <th>
        {
-        product.paid === true ? 'Paid' :  <Link to={`/dashboard/payment/${product._id}`}><button className="btn btn-warning btn-xs"></button></Link>
+        product.paid === true ? 'Paid' :  <Link to={`/dashboard/payment/${product._id}`}><button className="btn btn-warning btn-xs">Pay</button></Link>
        }
       </th>
     </tr>

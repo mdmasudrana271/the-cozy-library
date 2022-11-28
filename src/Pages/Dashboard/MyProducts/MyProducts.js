@@ -74,18 +74,6 @@ const MyProducts = () => {
       return <Spinner></Spinner>
     }
 
-  // useEffect(()=>{
-  //   fetch(`http://localhost:5000/my-products?email=${user.email}`,{
-  //       headers: {
-  //         authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
-  //     }
-  //     })
-  //     .then(res => res.json())
-  //     .then(data=> {
-  //       setProducts(data)
-  //     })
-  // },[user.email])
-
 
   return (
 
@@ -146,7 +134,12 @@ const MyProducts = () => {
                   </label>
                     </td>
                     <td>
-                      <button onClick={()=> handelAdvertise(product)} className="btn btn-info btn-xs">Ads</button>
+                      {
+                        product.status === 'Sold' ? 'Product Sold' :
+                        <>
+                        {product.advertise === 'true' ? 'already in advertise' : <button onClick={()=> handelAdvertise(product)} className="btn btn-info btn-xs">Ads</button>}
+                        </>
+                      }
                     </td>
                   </tr>
                   

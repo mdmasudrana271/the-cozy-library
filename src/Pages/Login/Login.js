@@ -88,7 +88,7 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          
+          toast.success('login successfully')
         }
       });
   }; 
