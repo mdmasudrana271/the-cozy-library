@@ -32,11 +32,20 @@ const ProductCard = ({product, setBooking}) => {
         <div className="md:flex justify-between items-center">
         <p>Use: {year} years</p>
         <p>Condition: {condition}</p>
-        <p className="text-info font-bold">{status}</p>
+        <p className="text-warning font-bold">{status === 'Sold' && 'Sold'}</p>
         </div>
         <div className="card-actions justify-end">
-          <div className="badge badge-outline cursor-pointer">Add WishList</div>
-          <label htmlFor="booking-modal" onClick={()=> setBooking(product)} className="badge badge-outline cursor-pointer">Book Now</label>
+          {
+
+            status === 'Sold' ? ''  : 
+            <>
+            
+            <div  className="badge badge-outline cursor-pointer">Add WishList</div>
+            <label  htmlFor="booking-modal" onClick={()=> setBooking(product)} className="badge badge-outline cursor-pointer">Book Now</label>
+            </>
+
+
+          }
         </div>
       </div>
     </div>

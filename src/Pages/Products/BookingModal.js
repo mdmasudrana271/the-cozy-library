@@ -23,7 +23,7 @@ const BookingModal = ({booking, setBooking}) => {
             phone,
             price,
             location,
-            paid: false
+            paid: false,
         }
         console.log(order);
 
