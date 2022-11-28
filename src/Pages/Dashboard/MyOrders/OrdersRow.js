@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OrdersRow = ({product}) => {
   return (
@@ -9,7 +10,7 @@ const OrdersRow = ({product}) => {
       <td>{product.price}</td>
       <td>{product.location}</td>
       <th>
-        <button className="btn btn-warning btn-xs">Pay</button>
+        <Link to={`/dashboard/payment/${product._id}`}><button className="btn btn-warning btn-xs">Pay</button></Link>
       </th>
     </tr>
   );

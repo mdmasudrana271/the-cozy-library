@@ -96,7 +96,7 @@ const AddProduct = () => {
           <input
             {...register("oldPrice", { required: "Old price is required" })}
             type="text"
-            defaultValue='$'
+            placeholder='$'
             className="input input-bordered w-full"
           />
           {errors.oldPrice && (
@@ -173,7 +173,7 @@ const AddProduct = () => {
           <input
             {...register("price", { required: "Price is required" })}
             type="text"
-            defaultValue='৳'
+           placeholder='$'
             className="input input-bordered w-full"
           />
           {errors.price && (

@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 const Products = () => {
   const data = useLoaderData();
   const [booking, setBooking] = useState(null);
-  console.log(data)
+
   return (
     <section>
       {

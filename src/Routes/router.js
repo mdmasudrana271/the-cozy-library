@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashBoardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
+import Blog from "../Pages/Blog/Blog";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import MyBuyer from "../Pages/Dashboard/MyBuyer/MyBuyer";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import MySeller from "../Pages/Dashboard/MySeller/MySeller";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Products from "../Pages/Products/Products";
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: '/home',
                 element: <Home></Home>
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             },
             {
                 path: '/category/:id',
@@ -54,6 +60,12 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/my-orders',
                 element: <PrivateRoute><MyOrders></MyOrders></PrivateRoute>
+
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>,
+                loader: ({params})=> fetch(`http://localhost:5000/my-orders/${params.id}`)
 
             },
             {

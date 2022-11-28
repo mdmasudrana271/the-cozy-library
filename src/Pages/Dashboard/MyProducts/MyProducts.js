@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Spinner from "../../../components/Spinner/Spinner";
 import { AuthContext } from "../../../context/AuthProvider";
 import ConfirmationModal from "../../Shared/ConfirmModal/ConfirmationModal";
-import ProductsRow from "./ProductsRow";
+
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
@@ -64,7 +64,6 @@ const MyProducts = () => {
             toast.success('Product deleted successfully')
             refetch()
           }
-          console.log(data)
         })
     }
 
@@ -116,7 +115,7 @@ const MyProducts = () => {
               {
                 products?.map(product=> 
                   
-                  <tr>
+                  <tr key={product._id}>
                     <td>
                       <div className="flex items-center space-x-3">
                         <div className="avatar">

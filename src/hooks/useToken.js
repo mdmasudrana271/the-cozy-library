@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 const useToken = (email) => {
-  console.log(email)
   const [token, setToken] = useState("");
   useEffect(() => {
     if (email) {
@@ -12,7 +11,6 @@ const useToken = (email) => {
             localStorage.setItem("bookAccessToken", data.accessToken);
             setToken(data.accessToken);
           }
-          console.log(data)
         });
     }
   }, [email]);

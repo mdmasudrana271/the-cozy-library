@@ -26,7 +26,6 @@ const MyOrders = () => {
     return <Spinner></Spinner>
   }
 
-  console.log(products)
 
   return (
     <section>
