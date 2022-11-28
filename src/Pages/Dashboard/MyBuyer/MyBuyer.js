@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Spinner from "../../../components/Spinner/Spinner";
 import ConfirmationModal from "../../Shared/ConfirmModal/ConfirmationModal";
-import BuyerRow from "./BuyerRow";
 
 const MyBuyer = () => {
 
@@ -18,7 +17,7 @@ const MyBuyer = () => {
     const {data: buyers = [], isLoading, refetch} = useQuery({
       queryKey: ["buyers"],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/buyers', {
+      const res = await fetch('https://the-cozy-library-server.vercel.app/buyers', {
         headers: {
           authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
         },
@@ -30,7 +29,7 @@ const MyBuyer = () => {
 
 
     const handleDeleteSeller = (user) => {
-      fetch(`http://localhost:5000/my-buyer/${user._id}`, {
+      fetch(`https://the-cozy-library-server.vercel.app/my-buyer/${user._id}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",

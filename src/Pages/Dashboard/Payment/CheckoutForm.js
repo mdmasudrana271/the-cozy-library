@@ -16,7 +16,7 @@ const CheckoutForm = ({ order }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://the-cozy-library-server.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ const CheckoutForm = ({ order }) => {
         bookingId: _id,
       };
 
-      fetch("http://localhost:5000/payments", {
+      fetch("https://the-cozy-library-server.vercel.app/payments", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -101,7 +101,7 @@ const CheckoutForm = ({ order }) => {
             setSuccess("Congrats! your payment completed");
             setTransactionId(paymentIntent.id);
 
-            fetch(`http://localhost:5000/products/${product}`, {
+            fetch(`https://the-cozy-library-server.vercel.app/products/${product}`, {
               method: "PATCH",
               headers: {
                 "content-type": "application/json",

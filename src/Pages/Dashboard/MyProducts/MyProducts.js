@@ -21,7 +21,7 @@ const MyProducts = () => {
     queryKey: ["report-product"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/my-products?email=${user.email}`,
+        `https://the-cozy-library-server.vercel.app/my-products?email=${user.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
@@ -34,7 +34,7 @@ const MyProducts = () => {
   });
 
   const handelAdvertise = (product) => {
-    fetch(`http://localhost:5000/advertise/${product._id}`, {
+    fetch(`https://the-cozy-library-server.vercel.app/advertise/${product._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -52,7 +52,7 @@ const MyProducts = () => {
   };
 
   const handleDeleteProduct = (product) => {
-    fetch(`http://localhost:5000/my-products/${product._id}`, {
+    fetch(`https://the-cozy-library-server.vercel.app/my-products/${product._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

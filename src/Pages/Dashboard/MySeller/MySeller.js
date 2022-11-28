@@ -18,7 +18,7 @@ const MySeller = () => {
   const {data: seller = [], isLoading, refetch} = useQuery({
     queryKey: ["seller"],
   queryFn: async () => {
-    const res = await fetch('http://localhost:5000/seller', {
+    const res = await fetch('https://the-cozy-library-server.vercel.app/seller', {
       headers: {
         authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
       },
@@ -30,7 +30,7 @@ const MySeller = () => {
 
 
   // useEffect(() => {
-  //   fetch("http://localhost:5000/seller", {
+  //   fetch("https://the-cozy-library-server.vercel.app/seller", {
   //     headers: {
   //       authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
   //     },
@@ -42,7 +42,7 @@ const MySeller = () => {
   // }, []);
 
   const handleMakeVerified = (user) => {
-    fetch(`http://localhost:5000/verify-seller/${user._id}`, {
+    fetch(`https://the-cozy-library-server.vercel.app/verify-seller/${user._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -59,7 +59,7 @@ const MySeller = () => {
   };
 
   const handleDeleteSeller = (user) => {
-    fetch(`http://localhost:5000/my-seller/${user._id}`, {
+    fetch(`https://the-cozy-library-server.vercel.app/my-seller/${user._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

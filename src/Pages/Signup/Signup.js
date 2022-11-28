@@ -65,6 +65,7 @@ const Signup = () => {
                 displayName: createdUser.name,
                 photoURL: createdUser.image,
               };
+              // setUserLoginEmail(user.email);
               updateUserProfile(userInfo)
               .then(()=>{
                 saveUser(createdUser);
@@ -94,7 +95,6 @@ const Signup = () => {
         image: user.photoURL,
         verified: false
       };
-      setUserLoginEmail(createdUser.email)
      saveUser(createdUser)
     })
   }
@@ -102,7 +102,7 @@ const Signup = () => {
   // post user information on database
 
   const saveUser = (createdUser) => {
-    fetch("http://localhost:5000/users", {
+    fetch("https://the-cozy-library-server.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -111,8 +111,8 @@ const Signup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setUserLoginEmail(createdUser.email);
         console.log(data)
+        setUserLoginEmail(createdUser.email)
       });
   };
 

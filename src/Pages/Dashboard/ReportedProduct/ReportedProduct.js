@@ -17,7 +17,7 @@ const ReportedProduct = () => {
   } = useQuery({
     queryKey: ["report-product"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/report-product", {
+      const res = await fetch("https://the-cozy-library-server.vercel.app/report-product", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
         },
@@ -27,16 +27,14 @@ const ReportedProduct = () => {
     },
   });
 
-  console.log(products)
 
   const handleDeleteProduct = (product) => {
-    fetch(`http://localhost:5000/report-products/${product._id}`, {
+    fetch(`https://the-cozy-library-server.vercel.app/report-product/${product._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
       },
-      body: JSON.stringify(product),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -45,6 +43,8 @@ const ReportedProduct = () => {
           refetch();
         }
       });
+
+      console.log(product)
   };
 
   if (isLoading) {

@@ -9,7 +9,7 @@ const ProductCard = ({product, setBooking}) => {
     const [userStatus, setUserStatus] = useState({})
     useEffect(()=>{
       
-       axios.get(`http://localhost:5000/user-status?name=${sellerName}`,{
+       axios.get(`https://the-cozy-library-server.vercel.app/user-status?name=${sellerName}`,{
           headers: {
             'content-type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
@@ -24,7 +24,7 @@ const ProductCard = ({product, setBooking}) => {
 
     const handleReportProduct = (product) =>{
 
-       fetch('http://localhost:5000/report-product',{
+       fetch('https://the-cozy-library-server.vercel.app/report-product',{
         method: 'POST',
         headers: {
           'content-type': 'application/json',

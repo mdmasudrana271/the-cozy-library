@@ -2,6 +2,7 @@ import React from "react";
 import Advertisement from "./Advertisement";
 import Banner from "./Banner";
 import Category from "./Category";
+import UseBookSection from "./UseBookSection";
 
 const Home = () => {
   return (
@@ -14,6 +15,9 @@ const Home = () => {
       </div>
       <div>
         <Category></Category>
+      </div>
+      <div className="mt-10">
+        <UseBookSection></UseBookSection>
       </div>
     </section>
   );

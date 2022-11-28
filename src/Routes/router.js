@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoute><Products></Products></PrivateRoute>,
-                loader:({params})=> fetch(`http://localhost:5000/products?id=${params.id}`)
+                loader:({params})=> fetch(`https://the-cozy-library-server.vercel.app/products?id=${params.id}`)
 
             },
             {
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <PrivateRoute><Payment></Payment></PrivateRoute>,
-                loader: ({params})=> fetch(`http://localhost:5000/my-orders/${params.id}`)
+                loader: ({params})=> fetch(`https://the-cozy-library-server.vercel.app/my-orders/${params.id}`)
 
             },
             {

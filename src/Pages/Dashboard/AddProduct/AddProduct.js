@@ -42,7 +42,7 @@ const AddProduct = () => {
           status: 'available'
         }
 
-        fetch('http://localhost:5000/products',{
+        fetch('https://the-cozy-library-server.vercel.app/products',{
           method: 'POST',
           headers: {
             'content-type': 'application/json',

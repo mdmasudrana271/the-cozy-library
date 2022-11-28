@@ -9,7 +9,7 @@ const Advertisement = () => {
   const { data: products, isLoading } = useQuery({
     queryKey: ["ads-products"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/ads-products", {
+      const res = await fetch("https://the-cozy-library-server.vercel.app/ads-products", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
         },
