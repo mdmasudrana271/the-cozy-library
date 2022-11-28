@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Spinner from "../../../components/Spinner/Spinner";
-import { AuthContext } from "../../../context/AuthProvider";
 import ConfirmationModal from "../../Shared/ConfirmModal/ConfirmationModal";
 
-const MyProducts = () => {
-  const { user } = useContext(AuthContext);
-
+const ReportedProduct = () => {
   const [deleteProducts, setDeleteProducts] = useState(null);
   const closeModal = () => {
     setDeleteProducts(null);
@@ -20,39 +17,20 @@ const MyProducts = () => {
   } = useQuery({
     queryKey: ["report-product"],
     queryFn: async () => {
-      const res = await fetch(
-        `http://localhost:5000/my-products?email=${user.email}`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
-          },
-        }
-      );
+      const res = await fetch("http://localhost:5000/report-product", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
+        },
+      });
       const data = res.json();
       return data;
     },
   });
 
-  const handelAdvertise = (product) => {
-    fetch(`http://localhost:5000/advertise/${product._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("bookAccessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          toast.success("Add Product Successfully");
-        }
-      });
-
-    // console.log(product)
-  };
+  console.log(products)
 
   const handleDeleteProduct = (product) => {
-    fetch(`http://localhost:5000/my-products/${product._id}`, {
+    fetch(`http://localhost:5000/report-products/${product._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -87,9 +65,9 @@ const MyProducts = () => {
                   <tr>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Status</th>
+                    <th>Seller</th>
+                    <th>Phone</th>
                     <th>Action</th>
-                    <th>Advertised</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -104,11 +82,15 @@ const MyProducts = () => {
                           </div>
                           <div>
                             <div className="font-bold">{product.name}</div>
+                            <div className="text-sm opacity-50">
+                              United States
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td>{product.price}</td>
-                      <td>Purple</td>
+                      <td>{product.sellerName}</td>
+                      <td>{product.number}</td>
                       <td>
                         <label
                           onClick={() => setDeleteProducts(product)}
@@ -117,24 +99,6 @@ const MyProducts = () => {
                         >
                           Delete
                         </label>
-                      </td>
-                      <td>
-                        {product.status === "Sold" ? (
-                          "Product Sold"
-                        ) : (
-                          <>
-                            {product.advertise === "true" ? (
-                              "already in advertise"
-                            ) : (
-                              <button
-                                onClick={() => handelAdvertise(product)}
-                                className="btn btn-info btn-xs"
-                              >
-                                Ads
-                              </button>
-                            )}
-                          </>
-                        )}
                       </td>
                     </tr>
                   ))}
@@ -159,4 +123,4 @@ const MyProducts = () => {
   );
 };
 
-export default MyProducts;
+export default ReportedProduct;

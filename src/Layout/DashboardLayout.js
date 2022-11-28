@@ -27,6 +27,7 @@ const DashBoardLayout = () => {
                 isAdmin && <li>
                 <Link to='/dashboard/my-buyer'>My Buyers</Link>
                 <Link to='/dashboard/my-seller'>My Seller</Link>
+                <Link to='/dashboard/reported-products'>Reported Products</Link>
                 </li>
               }
             </>

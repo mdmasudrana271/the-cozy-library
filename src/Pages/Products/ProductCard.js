@@ -1,31 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaClock } from 'react-icons/fa';
 
 const ProductCard = ({product, setBooking}) => {
     const {name, image, condition, oldPrice, price, location, sellerName, time, year, status} = product;
 
     const [userStatus, setUserStatus] = useState({})
-
-    // async function getUser() {
-    //   try {
-    //     const response = await axios.get(`http://localhost:5000/user-status?name=${sellerName}`,{
-    //       headers: {
-    //         'content-type': 'application/json',
-    //         authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
-    //       },
-    //     })
-    //     // console.log(response.data);
-    //     // setuserStatus(response.data)
-    //     const data = response.data;
-    //     return setUserStatus(data)
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
-
-
-
     useEffect(()=>{
       
        axios.get(`http://localhost:5000/user-status?name=${sellerName}`,{
@@ -40,8 +21,25 @@ const ProductCard = ({product, setBooking}) => {
     },[sellerName])
 
 
-    console.log(userStatus)
-    // getUser()
+
+    const handleReportProduct = (product) =>{
+
+       fetch('http://localhost:5000/report-product',{
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `Bearer ${localStorage.getItem('bookAccessToken')}`
+        },
+        body: JSON.stringify(product)
+       })
+       .then(res => res.json())
+       .then(data => {
+        if(data.acknowledged){
+          toast.success('Product Reported Successfully!')
+        }
+       })
+
+    }
 
 
 
@@ -84,7 +82,7 @@ const ProductCard = ({product, setBooking}) => {
             status === 'Sold' ? ''  : 
             <>
             
-            <div  className="badge badge-outline cursor-pointer">Add WishList</div>
+            <div onClick={()=>handleReportProduct(product)} className="badge badge-outline cursor-pointer">Report Product</div>
             <label  htmlFor="booking-modal" onClick={()=> setBooking(product)} className="badge badge-outline cursor-pointer">Book Now</label>
             </>
 

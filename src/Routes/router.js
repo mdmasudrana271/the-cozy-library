@@ -8,6 +8,7 @@ import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import MySeller from "../Pages/Dashboard/MySeller/MySeller";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import ReportedProduct from "../Pages/Dashboard/ReportedProduct/ReportedProduct";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Products from "../Pages/Products/Products";
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/my-seller',
                 element: <PrivateRoute><AdminRoute><MySeller></MySeller></AdminRoute></PrivateRoute>
+            },
+            {
+                path: '/dashboard/reported-products',
+                element: <PrivateRoute><AdminRoute><ReportedProduct></ReportedProduct></AdminRoute></PrivateRoute>
             }
         ]
     }
