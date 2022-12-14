@@ -17,7 +17,7 @@ const Header = () => {
   };
     
   return (
-    <div className="navbar">
+    <div className={`navbar sticky top-0 z-10  ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -78,7 +78,7 @@ const Header = () => {
           )}
             <div
               onClick={handleTheme}
-              className="cursor-pinter flex items-center justify-start mx-3"
+              className="cursor-pointer flex items-center justify-start mx-3"
             >
               {theme === "dark" ? <FaSun></FaSun> : <FaMoon></FaMoon>}
             </div>
@@ -121,7 +121,7 @@ const Header = () => {
           )}
           <div
             onClick={handleTheme}
-            className="cursor-pinter flex items-center mx-3"
+            className="cursor-pointer flex items-center mx-6"
           >
             {theme === "dark" ? <FaSun></FaSun> : <FaMoon></FaMoon>}
           </div>

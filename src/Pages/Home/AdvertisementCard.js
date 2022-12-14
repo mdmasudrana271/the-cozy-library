@@ -2,9 +2,9 @@ import React from "react";
 
 const AdvertisementCard = ({ product, setBooking }) => {
   return (
-    <div className="card card-compact w-full bg-base-100 shadow-xl">
+    <div data-aos="flip-left" className="card card-compact w-full bg-base-100 shadow-xl">
       <figure>
-        <img className="w-full h-96" src={product.image} alt="Shoes" />
+        <img className="w-full md:h-64 h-full" src={product.image} alt="Shoes" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{product.name}</h2>

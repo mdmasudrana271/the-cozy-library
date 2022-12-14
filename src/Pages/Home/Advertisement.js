@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import AnimatedText from "react-animated-text-content";
 import Spinner from "../../components/Spinner/Spinner";
 import BookingModal from "../Products/BookingModal";
 import AdvertisementCard from "./AdvertisementCard";
@@ -33,7 +34,27 @@ const Advertisement = () => {
           
           </span>
           <h2 className="text-4xl font-bold lg:text-5xl">
-          Choose your best Book
+          <AnimatedText
+                type="words" // animate words or chars
+                animation={{
+                  x: "200px",
+                  y: "-20px",
+                  scale: 1.1,
+                  ease: "ease-in-out",
+                }}
+                animationType="throw"
+                interval={0.06}
+                duration={0.8}
+                tag="span"
+                className="animated-paragraph"
+                includeWhiteSpaces
+                threshold={0.1}
+                rootMargin="20%"
+				// loop={true}
+              >
+                Choose your best Book
+              </AnimatedText>
+          
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
