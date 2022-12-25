@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashBoardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import Blog from "../Pages/Blog/Blog";
+import Contact from "../Pages/Contact/Contact";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import MyBuyer from "../Pages/Dashboard/MyBuyer/MyBuyer";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
                 element: <PrivateRoute><Products></Products></PrivateRoute>,
                 loader:({params})=> fetch(`https://the-cozy-library-server.vercel.app/products?id=${params.id}`)
 
+            },
+            {
+                path:'/contact',
+                element: <Contact></Contact>
             },
             {
                 path: '/login',

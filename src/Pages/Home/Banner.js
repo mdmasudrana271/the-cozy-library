@@ -19,7 +19,7 @@ const Banner = () => {
                   y: "-20px",
                   scale: 1.1,
                   ease: "ease-in-out",
-				  loop: true
+                  loop: true,
                 }}
                 animationType="float"
                 interval={0.06}
@@ -29,7 +29,7 @@ const Banner = () => {
                 includeWhiteSpaces
                 threshold={0.1}
                 rootMargin="20%"
-				// loop={true}
+                // loop={true}
               >
                 book
               </AnimatedText>
@@ -40,7 +40,7 @@ const Banner = () => {
               options={{
                 strings: ["because we believe we're buying the time read them"],
                 autoStart: true,
-				delay: 35,
+                delay: 35,
                 loop: true,
               }}
             />

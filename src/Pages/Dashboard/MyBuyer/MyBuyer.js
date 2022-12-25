@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import Spinner from "../../../components/Spinner/Spinner";
 import ConfirmationModal from "../../Shared/ConfirmModal/ConfirmationModal";
@@ -27,6 +28,9 @@ const MyBuyer = () => {
     },
     })
 
+
+
+    console.log(buyers)
 
     const handleDeleteSeller = (user) => {
       fetch(`https://the-cozy-library-server.vercel.app/my-buyer/${user._id}`, {

@@ -4,11 +4,10 @@ import Lottie from "lottie-react";
 
 const UseBookSection = () => {
   return (
-    <section>
+    <section className="w-11/12 mx-auto">
       <div className="hero bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
-          {/* <img src={book} className="w-1/2 rounded-lg shadow-2xl" alt="" /> */}
-          <figure className="lg:w-1/2">
+        <div className="hero-content flex-col lg:flex-row justify-between">
+          <figure className="h-80 md:w-80">
           <Lottie
             animationData={book}
             loop={true}

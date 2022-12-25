@@ -22,6 +22,8 @@ const Signup = () => {
 
   // toggle password type on input field
 
+  console.log(imageHostKey)
+
   const handlePasswordType = () => {
     if (passwordType === "password") {
       setPasswordType("text");
