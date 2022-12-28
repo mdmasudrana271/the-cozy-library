@@ -23,11 +23,11 @@ const Home = () => {
       <div>
         <Customers></Customers>
       </div>
-      <div className="my-8 text-center text-3xl font-semibold">
+      <div className="my-10 text-center text-3xl font-semibold">
         <h2 className="mb-5">Delivery Service</h2>
         <Delivery></Delivery>
       </div>
-      <div className="my-8 text-start text-3xl font-semibold w-11/12 mx-auto">
+      <div className="my-10 text-start text-3xl font-semibold w-11/12 mx-auto">
         <h2 className="mb-5">Weekly Popular Authors</h2>
         <Authors></Authors>
       </div>
