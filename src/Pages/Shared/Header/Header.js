@@ -6,7 +6,7 @@ import { AuthContext, ThemeContext } from "../../../context/AuthProvider";
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
-  const { user, logOut } = useContext(AuthContext);
+  const { user,logOut } = useContext(AuthContext);
 
   const handleTheme = () => {
     if (theme === "dark") {
