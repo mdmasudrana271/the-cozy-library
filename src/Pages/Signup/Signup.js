@@ -119,10 +119,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[700px] md:w-96 sm:w-9/12 mx-auto">
+    <div className="card overflow-hidden p-5 lg:w-4/12 md:w-6/12 mx-auto w-full shadow-xl bg-base-100 md:my-5">
       <div>
         <h1 className="text-4xl text-center font-bold">Register</h1>
-        <form className="mt-6 w-96" onSubmit={handleSubmit(handleSignup)}>
+        <form className="mt-6 " onSubmit={handleSubmit(handleSignup)}>
           <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Name</span>
@@ -131,7 +131,7 @@ const Signup = () => {
               {...register("name", { required: "Name is required" })}
               type="text"
               placeholder="Your Name"
-              className="input input-bordered w-1/2 md:w-full"
+              className="input input-bordered w-full"
             />
             {errors.name && (
               <p role="alert" className="text-error">
