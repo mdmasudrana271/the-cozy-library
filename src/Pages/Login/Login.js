@@ -42,7 +42,7 @@ const Login = () => {
       const user = result.user;
       console.log(user)
       toast.success('Login successfull')
-      setUserLoginEmail(data.email)
+      setUserLoginEmail(user.email)
       // navigate(from, {replace: true})
       reset()
     })

@@ -8,21 +8,27 @@ import { AuthContext } from "../../context/AuthProvider";
 import useToken from "../../hooks/useToken";
 
 const Signup = () => {
-  const { register,  formState: { errors },  handleSubmit,  reset,} = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
 
-  const [signUpError, setSignUPError] = useState('');
-    const [userLoginEmail, setUserLoginEmail] = useState('')
-    const [token] = useToken(userLoginEmail);
-    const navigate = useNavigate();
+  const [signUpError, setSignUPError] = useState("");
+  const [userLoginEmail, setUserLoginEmail] = useState("");
+  const [token] = useToken(userLoginEmail);
+  const navigate = useNavigate();
 
   const imageHostKey = process.env.REACT_APP_IMGBB_API_KEY;
   const [passwordType, setPasswordType] = useState("password");
   const googleProvider = new GoogleAuthProvider();
-  const { googleLogin, createUser, updateUserProfile } = useContext(AuthContext);
+  const { googleLogin, createUser, updateUserProfile } =
+    useContext(AuthContext);
 
   // toggle password type on input field
 
-  console.log(imageHostKey)
+  console.log(imageHostKey);
 
   const handlePasswordType = () => {
     if (passwordType === "password") {
@@ -34,9 +40,9 @@ const Signup = () => {
   };
 
   // signup with email and password
-  if(token){
-    navigate('/');
-}
+  if (token) {
+    navigate("/");
+  }
 
   const handleSignup = (data) => {
     const image = data.image[0];
@@ -55,13 +61,13 @@ const Signup = () => {
             email: data.email,
             role: data.type,
             image: imgData.data.url,
-            verified: false
+            verified: false,
           };
-          setSignUPError('');
+          setSignUPError("");
           createUser(data.email, data.password)
             .then((result) => {
               const user = result.user;
-              console.log(user)
+              console.log(user);
               toast.success("Create User Successfull");
               const userInfo = {
                 displayName: createdUser.name,
@@ -69,15 +75,15 @@ const Signup = () => {
               };
               // setUserLoginEmail(user.email);
               updateUserProfile(userInfo)
-              .then(()=>{
-                saveUser(createdUser);
-              })
-              .catch(error=> console.log(error))
+                .then(() => {
+                  saveUser(createdUser);
+                })
+                .catch((error) => console.log(error));
               reset();
             })
             .catch((error) => {
               console.log(error.message);
-              setSignUPError(error.message)
+              setSignUPError(error.message);
             });
         }
       });
@@ -85,21 +91,20 @@ const Signup = () => {
 
   // login with google
 
-  const handleGoogleLogin = ()=>{
-    googleLogin(googleProvider)
-    .then(result => {
+  const handleGoogleLogin = () => {
+    googleLogin(googleProvider).then((result) => {
       const user = result.user;
       // console.log(user)
       const createdUser = {
         name: user.displayName,
         email: user.email,
-        role: 'Buyer',
+        role: "Buyer",
         image: user.photoURL,
-        verified: false
+        verified: false,
       };
-     saveUser(createdUser)
-    })
-  }
+      saveUser(createdUser);
+    });
+  };
 
   // post user information on database
 
@@ -113,8 +118,8 @@ const Signup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        setUserLoginEmail(createdUser.email)
+        console.log(data);
+        setUserLoginEmail(createdUser.email);
       });
   };
 
