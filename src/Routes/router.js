@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <PrivateRoute><Products></Products></PrivateRoute>,
+                element: <Products></Products>,
                 loader:({params})=> fetch(`https://the-cozy-library-server.vercel.app/products?id=${params.id}`)
 
             },

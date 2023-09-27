@@ -9,9 +9,9 @@ const Banner = () => {
     <section className="dark:bg-gray-800 dark:text-gray-100 h-[100vh]">
       <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
         <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
-          <h1 className="text-3xl font-bold leading-none sm:text-6xl mr-1">
-            We buy
-            <span className="text-orange-400 ml-4">
+          <h1 className="mr-1 text-3xl font-bold leading-none sm:text-6xl">
+            We sell
+            <span className="ml-4 text-orange-400">
               <AnimatedText
                 type="words" // animate words or chars
                 animation={{
@@ -34,10 +34,10 @@ const Banner = () => {
               </AnimatedText>
             </span>
           </h1>
-          <p className="text-sm md:text-lg sm:text-3xl mt-4">
+          <p className="mt-4 text-sm md:text-lg sm:text-3xl">
             <Typewriter
               options={{
-                strings: ["because we believe we're buying the time read them"],
+                strings: ["because we believe we're selling the time read them"],
                 autoStart: true,
                 delay: 35,
                 loop: true,
@@ -45,7 +45,7 @@ const Banner = () => {
             />
           </p>
         </div>
-        <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 ">
+        <div className="flex justify-center items-center p-6 mt-8 lg:mt-0">
           <Lottie className="md:w-72" animationData={animation} loop={true} />
         </div>
       </div>
